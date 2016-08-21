@@ -182,7 +182,7 @@ public class ConvertBridge {
             item.setAutoCreateClassName(psiClass.getName());
             item.setFields(initFilterField(psiClass));
             item.setPsiClass(psiClass);
-            item.setPackName(innerClassEntity.getPackName()+"."+innerClassEntity.getClassName());
+            item.setPackName(innerClassEntity.getPackName() + "." + innerClassEntity.getClassName());
             item.setType("%s");
             mFilterClass.add(item);
             recursionInnerClass(item);
@@ -472,14 +472,17 @@ public class ConvertBridge {
                 typeStr = "boolean";
 
             } else if (type instanceof Integer) {
-                typeStr = "int";
+                if (key.contains("id") || key.contains("count") || key.contains("money") || key.contains("size") || key.contains("page")) {
+                    typeStr = "long";
+                } else {
+                    typeStr = "int";
+                }
             } else if (type instanceof Double) {
                 typeStr = "double";
             } else if (type instanceof Long) {
                 typeStr = "long";
             } else if (type instanceof String) {
                 typeStr = "String";
-
             } else {
                 typeStr = "Object";
             }
